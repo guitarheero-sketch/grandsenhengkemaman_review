@@ -3,92 +3,454 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#8b1e16" />
   <title>Grand Senheng Kemaman · S-Coin Review Helper</title>
   <style>
     :root{
-      --bg:#f6f1e8;--paper:#fffaf2;--card:#fff;--ink:#211714;--muted:#715d55;--line:#ead8c7;
-      --red:#b91c1c;--redDark:#7f1d1d;--gold:#f5b83d;--goldSoft:#fff0cf;--teal:#0f766e;--tealSoft:#d7fbf3;
-      --shadow:0 20px 52px rgba(91,41,23,.13);--radius:26px;
+      --bg:#fff7ed;--bg2:#f4efe6;--paper:#fffdf8;--card:#ffffff;--ink:#241311;--muted:#755f58;--line:#ead7c4;
+      --red:#be1e2d;--redDark:#7f1d1d;--gold:#f6b73c;--goldSoft:#fff2cf;--green:#0f766e;--greenSoft:#e0fbf5;
+      --blue:#2563eb;--shadow:0 22px 56px rgba(72,35,23,.14);--radius:26px;
     }
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{margin:0;padding:0}
-    body{min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);line-height:1.5;padding:14px;background:radial-gradient(circle at 5% 0%,rgba(245,184,61,.28),transparent 34%),radial-gradient(circle at 100% 12%,rgba(15,118,110,.16),transparent 30%),linear-gradient(180deg,#fff9ef 0%,var(--bg) 50%,#eee5d8 100%)}
-    button,input,textarea{font:inherit} button{cursor:pointer}.app{width:min(1040px,100%);margin:0 auto 92px}
-    .hero{position:relative;overflow:hidden;border-radius:34px;background:linear-gradient(135deg,var(--redDark),var(--red) 58%,var(--teal));color:white;padding:24px;box-shadow:var(--shadow)}
-    .hero:after{content:"S";position:absolute;right:22px;bottom:-54px;font-size:190px;line-height:1;font-weight:1000;color:rgba(255,255,255,.08)}
-    .heroGrid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:end}.pill{display:inline-flex;gap:8px;align-items:center;width:max-content;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font-weight:900;font-size:.78rem}.hero h1{margin:12px 0 8px;font-size:clamp(1.65rem,5vw,3rem);line-height:1.02;letter-spacing:-.055em}.hero p{margin:0;color:rgba(255,255,255,.9);max-width:650px}.guide{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:24px;padding:14px;backdrop-filter:blur(10px)}.guide b{display:block;margin-bottom:6px}.guide ol{margin:0;padding-left:20px;color:rgba(255,255,255,.9);font-size:.86rem}.guide li{margin:4px 0}
-    .main{display:grid;grid-template-columns:270px 1fr;gap:14px;margin-top:14px}.rail,.panel{background:rgba(255,250,242,.9);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(10px)}.rail{padding:14px;align-self:start;position:sticky;top:14px}.railTitle{font-weight:1000;color:#4a271f;margin:0 0 10px}.progress{display:grid;gap:8px}.pstep{display:flex;gap:10px;align-items:flex-start;border:1px solid transparent;border-radius:18px;padding:10px;color:var(--muted);font-size:.84rem}.pstep .n{width:28px;height:28px;border-radius:12px;display:grid;place-items:center;background:#f1e2d5;color:#77472f;font-weight:1000;flex:0 0 auto}.pstep b{display:block}.pstep span{display:block;font-size:.74rem;line-height:1.25}.pstep.active{background:var(--goldSoft);border-color:#ffd58e;color:#63350d}.pstep.active .n{background:var(--gold);color:#3c2205}.pstep.done{background:#f2fff8;color:#166534}.pstep.done .n{background:#dcfce7;color:#166534}.note{margin-top:12px;border:1px dashed #e7c8ad;background:#fff;border-radius:18px;padding:12px;color:var(--muted);font-size:.78rem}
-    .panel{overflow:hidden;min-height:570px}.screen{display:none;padding:22px;animation:rise .22s ease}.screen.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .head{display:flex;gap:13px;align-items:flex-start;margin-bottom:18px}.badge{width:46px;height:46px;border-radius:18px;background:#fff1d6;border:1px solid #ffdca2;color:#7a3a00;display:grid;place-items:center;font-weight:1000;flex:0 0 auto}.head h2{margin:0;font-size:1.35rem;letter-spacing:-.035em}.head p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
-    .modeGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.mode{position:relative;text-align:left;border:2px solid var(--line);border-radius:26px;background:white;padding:22px;min-height:190px;color:var(--ink);transition:.18s}.mode:hover{transform:translateY(-2px);border-color:var(--gold)}.mode.selected{border-color:var(--red);background:linear-gradient(180deg,#fff,#fff4ee)}.emoji{font-size:2.4rem;margin-bottom:14px}.mode strong{display:block;font-size:1.15rem}.mode span{display:block;color:var(--muted);margin-top:7px}.mode small{display:inline-flex;margin-top:12px;background:#f8eadb;color:#773f15;border-radius:999px;padding:7px 10px;font-weight:900;font-size:.73rem}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin-bottom:12px}label{display:block;margin-bottom:7px;color:#4b2820;font-size:.82rem;font-weight:1000}.req{color:var(--red)}input,textarea{width:100%;border:2px solid var(--line);background:white;color:var(--ink);border-radius:18px;padding:14px 15px;outline:none;transition:.18s}textarea{min-height:220px;resize:vertical}input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(245,184,61,.18)}.hint{font-size:.76rem;color:var(--muted);margin-top:7px}.money{position:relative}.money b{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}.money input{padding-left:44px}.calc{display:none;margin:0 0 14px;padding:12px 13px;border-radius:18px;background:#effaf8;border:1px solid #bdeee6;color:var(--teal);font-weight:900;font-size:.86rem}.calc.show{display:block}.calc button{border:0;background:var(--teal);color:white;border-radius:999px;padding:7px 10px;font-weight:1000;margin-left:6px;font-size:.74rem}
-    .error{display:none;color:var(--red);font-weight:900;font-size:.8rem;margin-top:8px}.error.show{display:block}.topTools{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:12px}.topTools p{margin:0;color:var(--muted);font-size:.85rem}.templates{display:grid;gap:10px}.tcard{text-align:left;border:2px solid var(--line);border-radius:20px;background:#fff;padding:14px;color:var(--ink);transition:.16s}.tcard:hover{border-color:var(--gold);transform:translateY(-1px)}.tcard.selected{border-color:var(--teal);background:#f0fdfa}.tag{display:inline-flex;background:#f9ead4;color:#773f15;border-radius:999px;padding:5px 8px;font-weight:1000;font-size:.68rem;margin-bottom:9px}.tcard p{margin:0;font-size:.92rem}.editGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.side{background:#fff;border:1px solid var(--line);border-radius:22px;padding:14px}.side h3{margin:0 0 10px;font-size:.96rem}.checks{display:grid;gap:8px}.check{display:flex;gap:8px;color:var(--muted);font-size:.82rem}.tick{width:19px;height:19px;border-radius:7px;background:#fee2e2;color:#991b1b;display:grid;place-items:center;font-weight:1000;font-size:.7rem;flex:0 0 auto}.check.ok .tick{background:#dcfce7;color:#166534}.tip{margin-top:12px;background:#f8eadb;color:#633918;border-radius:16px;padding:11px;font-size:.8rem}.editBtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.preview{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 12px 26px rgba(91,41,23,.08)}.reviewHead{display:flex;gap:12px;align-items:center;margin-bottom:12px}.avatar{width:42px;height:42px;border-radius:999px;background:#f3f4f6;display:grid;place-items:center;color:#6b7280;font-weight:1000}.stars{color:#f59e0b;letter-spacing:2px}.reviewText{white-space:pre-wrap;color:#24201d;font-size:.95rem}.hashtags{margin-top:12px;color:#2563eb;font-weight:900;font-size:.86rem;word-break:break-word}.warn{margin-top:13px;padding:12px;border-radius:18px;background:#fffbeb;border:1px solid #fde68a;color:#854d0e;font-size:.82rem;font-weight:750}
-    .nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:14px 16px;font-weight:1000;transition:.16s;width:100%}.btn:active{transform:scale(.98)}.primary{background:linear-gradient(135deg,var(--redDark),var(--red));color:white;box-shadow:0 12px 24px rgba(185,28,28,.2)}.soft{background:#fff;color:#7f1d1d;border:1px solid var(--line)}.ghost{width:auto;background:#fff9ef;color:#6b3d15;border:1px solid #f4d2a5;padding:11px 13px;font-size:.82rem}.teal{background:var(--teal);color:white}.float{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,242,.94);border-top:1px solid var(--line);backdrop-filter:blur(10px);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(25,13,9,.62);padding:18px;z-index:100}.modal.show{display:flex}.modalBox{width:min(470px,100%);background:#fffaf2;border-radius:30px;padding:22px;box-shadow:0 28px 70px rgba(0,0,0,.25)}.modalIcon{width:62px;height:62px;border-radius:22px;background:#dcfce7;color:#166534;display:grid;place-items:center;font-size:2rem;font-weight:1000;margin-bottom:12px}.modalBox h3{margin:0 0 8px}.modalBox p{margin:0 0 12px;color:var(--muted)}.modalBox ol{margin:0 0 16px;padding-left:20px}.modalBox li{margin:6px 0}.modalActions{display:grid;gap:9px}.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%) translateY(16px);opacity:0;pointer-events:none;background:#221713;color:#fff;padding:11px 14px;border-radius:999px;font-size:.84rem;font-weight:900;transition:.18s;z-index:110}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    @media(max-width:860px){.heroGrid,.main,.editGrid{grid-template-columns:1fr}.rail{position:relative;top:0}.progress{grid-template-columns:1fr 1fr}.guide{display:none}.float{display:block}}
-    @media(max-width:620px){body{padding:10px}.hero{padding:20px;border-radius:28px}.screen{padding:16px}.modeGrid,.grid,.nav,.progress{grid-template-columns:1fr}.ghost{width:100%}.topTools{display:block}.topTools .ghost{margin-top:9px}.app{margin-bottom:98px}}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;padding:0} body{min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 0 0,rgba(246,183,60,.32),transparent 28rem),radial-gradient(circle at 100% 10%,rgba(190,30,45,.18),transparent 24rem),linear-gradient(180deg,#fffaf2,var(--bg2));color:var(--ink);line-height:1.5;padding:14px} button,input,textarea{font:inherit} button{cursor:pointer}.app{width:min(1080px,100%);margin:0 auto 92px}.hero{position:relative;overflow:hidden;border-radius:34px;background:linear-gradient(135deg,var(--redDark),var(--red) 54%,#c56b19);color:white;padding:24px;box-shadow:var(--shadow)}.hero:after{content:"S";position:absolute;right:20px;bottom:-64px;font-size:210px;font-weight:1000;line-height:1;color:rgba(255,255,255,.09);transform:rotate(-8deg)}.heroInner{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:end}.pill{display:inline-flex;align-items:center;gap:8px;width:max-content;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.15);padding:8px 12px;border-radius:999px;font-weight:900;font-size:.78rem}.hero h1{margin:13px 0 8px;font-size:clamp(1.75rem,5.4vw,3.45rem);line-height:1;letter-spacing:-.06em}.hero p{margin:0;color:rgba(255,255,255,.9);max-width:650px}.miniGuide{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.13);border-radius:24px;padding:14px;backdrop-filter:blur(10px)}.miniGuide b{display:block;margin-bottom:6px}.miniGuide ol{margin:0;padding-left:20px;color:rgba(255,255,255,.9);font-size:.86rem}.miniGuide li{margin:4px 0}.layout{display:grid;grid-template-columns:280px 1fr;gap:14px;margin-top:14px}.rail,.panel{background:rgba(255,253,248,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(10px)}.rail{padding:14px;align-self:start;position:sticky;top:14px}.rail h2{font-size:1rem;margin:0 0 10px;letter-spacing:-.03em}.progress{display:grid;gap:8px}.stepDot{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:18px;border:1px solid transparent;color:var(--muted);font-size:.83rem}.num{width:30px;height:30px;display:grid;place-items:center;border-radius:12px;background:#f0dfd0;color:#78452c;font-weight:1000;flex:0 0 auto}.stepDot b{display:block}.stepDot span{display:block;font-size:.74rem;line-height:1.24}.stepDot.active{background:var(--goldSoft);border-color:#ffd68b;color:#67380b}.stepDot.active .num{background:var(--gold);color:#432600}.stepDot.done{background:#f0fdf4;color:#166534}.stepDot.done .num{background:#dcfce7;color:#166534}.railNote{margin-top:12px;border:1px dashed #e7c09d;background:#fff;border-radius:18px;padding:12px;color:var(--muted);font-size:.78rem}.panel{min-height:580px;overflow:hidden}.screen{display:none;padding:22px;animation:rise .22s ease}.screen.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.head{display:flex;gap:13px;align-items:flex-start;margin-bottom:18px}.badge{width:46px;height:46px;border-radius:18px;background:#fff0d0;border:1px solid #ffdca2;color:#733d05;display:grid;place-items:center;font-weight:1000;flex:0 0 auto}.head h2{margin:0;font-size:1.38rem;letter-spacing:-.035em}.head p{margin:4px 0 0;color:var(--muted);font-size:.9rem}.modeGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.modeCard{position:relative;text-align:left;border:2px solid var(--line);border-radius:26px;background:white;padding:22px;min-height:190px;color:var(--ink);transition:.18s}.modeCard:hover{transform:translateY(-2px);border-color:var(--gold)}.modeCard.selected{border-color:var(--red);background:linear-gradient(180deg,#fff,#fff4ef)}.emoji{font-size:2.5rem;margin-bottom:14px}.modeCard strong{display:block;font-size:1.14rem}.modeCard span{display:block;color:var(--muted);margin-top:7px}.modeCard small{display:inline-flex;margin-top:12px;background:#f8eadb;color:#773f15;border-radius:999px;padding:7px 10px;font-weight:900;font-size:.73rem}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin-bottom:12px}.field.full{grid-column:1/-1}label{display:block;margin-bottom:7px;color:#4b2820;font-size:.82rem;font-weight:1000}.req{color:var(--red)}input,textarea{width:100%;border:2px solid var(--line);background:white;color:var(--ink);border-radius:18px;padding:14px 15px;outline:none;transition:.18s}textarea{min-height:230px;resize:vertical}input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(246,183,60,.18)}.hint{font-size:.76rem;color:var(--muted);margin-top:7px}.money{position:relative}.money span{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:900}.money input{padding-left:44px}.impact{display:none;margin:2px 0 16px;padding:13px 14px;border-radius:18px;background:var(--greenSoft);border:1px solid #b9eee5;color:var(--green);font-weight:900}.impact.show{display:block}.error{display:none;margin-top:8px;color:var(--red);font-weight:900;font-size:.82rem}.error.show{display:block}.nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:14px 16px;font-weight:1000;transition:.16s;width:100%}.btn:active{transform:scale(.98)}.primary{background:linear-gradient(135deg,var(--redDark),var(--red));color:#fff;box-shadow:0 12px 26px rgba(190,30,45,.2)}.soft{background:#fff;color:#7f1d1d;border:1px solid var(--line)}.ghost{width:auto;background:#fff8eb;color:#6b3d15;border:1px solid #f4d2a5;padding:11px 13px;font-size:.82rem}.teal{background:var(--green);color:white}.topTools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.topTools p{margin:0;color:var(--muted);font-size:.84rem}.templates{display:grid;gap:10px}.templateCard{text-align:left;border:2px solid var(--line);border-radius:20px;background:#fff;padding:14px;color:var(--ink);transition:.16s}.templateCard:hover{border-color:var(--gold);transform:translateY(-1px)}.templateCard.selected{border-color:var(--green);background:#f0fdfa}.templateCard small{display:inline-flex;background:#f9ead4;color:#773f15;border-radius:999px;padding:5px 8px;font-weight:1000;font-size:.68rem;margin-bottom:9px}.templateCard p{margin:0;font-size:.92rem}.editGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}.side{background:#fff;border:1px solid var(--line);border-radius:22px;padding:14px}.side h3{margin:0 0 10px;font-size:.96rem}.checks{display:grid;gap:8px}.check{display:flex;gap:8px;color:var(--muted);font-size:.82rem}.tick{width:19px;height:19px;border-radius:7px;background:#fee2e2;color:#991b1b;display:grid;place-items:center;font-weight:1000;font-size:.7rem;flex:0 0 auto}.check.ok .tick{background:#dcfce7;color:#166534}.tip{margin-top:12px;background:#f8eadb;color:#633918;border-radius:16px;padding:11px;font-size:.8rem}.editBtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.editBtns .ghost{width:auto}.preview{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 12px 26px rgba(91,41,23,.08)}.reviewHead{display:flex;gap:12px;align-items:center;margin-bottom:12px}.avatar{width:42px;height:42px;border-radius:999px;background:#f3f4f6;display:grid;place-items:center;color:#6b7280;font-weight:1000}.stars{color:#f59e0b;letter-spacing:2px}.reviewText{white-space:pre-wrap;color:#24201d;font-size:.95rem}.hashtags{margin-top:12px;color:var(--blue);font-weight:900;font-size:.86rem;word-break:break-word}.warn{margin-top:13px;padding:12px;border-radius:18px;background:#fffbeb;border:1px solid #fde68a;color:#854d0e;font-size:.82rem;font-weight:750}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(25,13,9,.62);padding:18px;z-index:100}.modal.show{display:flex}.modalBox{width:min(470px,100%);background:#fffaf2;border-radius:30px;padding:22px;box-shadow:0 28px 70px rgba(0,0,0,.25)}.modalIcon{width:62px;height:62px;border-radius:22px;background:#dcfce7;color:#166534;display:grid;place-items:center;font-size:2rem;font-weight:1000;margin-bottom:12px}.modalBox h3{margin:0 0 8px}.modalBox p{margin:0 0 12px;color:var(--muted)}.modalBox ol{margin:0 0 16px;padding-left:20px}.modalBox li{margin:6px 0}.modalActions{display:grid;gap:9px}.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%) translateY(16px);opacity:0;pointer-events:none;background:#221713;color:#fff;padding:11px 14px;border-radius:999px;font-size:.84rem;font-weight:900;transition:.18s;z-index:110}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.float{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,242,.96);border-top:1px solid var(--line);backdrop-filter:blur(10px);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+    @media(max-width:880px){.heroInner,.layout,.editGrid{grid-template-columns:1fr}.rail{position:relative;top:0}.progress{grid-template-columns:1fr 1fr}.miniGuide{display:none}.float{display:block}}
+    @media(max-width:620px){body{padding:10px}.hero{padding:20px;border-radius:28px}.screen{padding:16px}.modeGrid,.formGrid,.nav,.progress{grid-template-columns:1fr}.topTools{display:block}.topTools .ghost{margin-top:9px;width:100%}.editBtns .ghost{width:100%}.app{margin-bottom:98px}}
   </style>
 </head>
 <body>
 <main class="app">
   <section class="hero">
-    <div class="heroGrid">
-      <div><div class="pill">⭐ S-Coin Review Helper · Customer Use</div><h1>Grand Senheng Kemaman</h1><p>Pilih ayat review S-Coin, edit ikut pengalaman sebenar anda, kemudian copy dan paste di Google Review.</p></div>
-      <div class="guide"><b>Cara guna</b><ol><li>Pilih beli atau redeem.</li><li>Isi barang, nilai dan kod staf.</li><li>Pilih satu ayat random.</li><li>Edit, tambah atau tulis sendiri.</li><li>Copy dan paste di Google Review.</li></ol></div>
+    <div class="heroInner">
+      <div>
+        <div class="pill">⭐ S-Coin Review Helper · Customer Use</div>
+        <h1>Grand Senheng Kemaman</h1>
+        <p>Pilih pengalaman anda, isi detail pembelian atau redemption, pilih ayat cadangan, kemudian edit sikit ikut pengalaman sebenar sebelum paste di Google Review.</p>
+      </div>
+      <div class="miniGuide">
+        <b>Cara guna ringkas</b>
+        <ol>
+          <li>Pilih beli dapat S-Coin atau redeem S-Coin.</li>
+          <li>Isi barang dan nilai yang berkaitan.</li>
+          <li>Pilih komen random, edit jika perlu, kemudian copy.</li>
+        </ol>
+      </div>
     </div>
   </section>
-  <section class="main">
-    <aside class="rail"><p class="railTitle">Progress review</p><div class="progress" id="progress"></div><div class="note">App ini untuk customer guna sendiri. Ayat boleh diedit supaya lebih kena dengan pengalaman sebenar.</div></aside>
+
+  <div class="layout">
+    <aside class="rail" aria-label="Langkah">
+      <h2>Progress review</h2>
+      <div class="progress" id="progress"></div>
+      <div class="railNote">Review ini untuk customer sendiri pilih, semak dan edit. Hashtag wajib akan dimasukkan automatik untuk KPI outlet.</div>
+    </aside>
+
     <section class="panel">
-      <section class="screen active" id="s1"><div class="head"><div class="badge">1</div><div><h2>Pilih pengalaman S-Coin</h2><p>Pilih satu dahulu. Lepas itu baru isi maklumat.</p></div></div><div class="modeGrid"><button class="mode" id="modeEarn" onclick="chooseMode('earn')"><div class="emoji">💰</div><strong>Beli & dapat S-Coin</strong><span>Untuk pembelian yang dapat S-Coin cashback.</span><small>Barang + spent + % + value S-Coin</small></button><button class="mode" id="modeRedeem" onclick="chooseMode('redeem')"><div class="emoji">🎁</div><strong>Redeem S-Coin</strong><span>Untuk tebus atau jimat guna S-Coin.</span><small>Barang + S-Coin used + value jimat</small></button></div></section>
-      <section class="screen" id="s2"><div class="head"><div class="badge">2</div><div><h2 id="formTitle">Isi maklumat</h2><p>Maklumat ini akan masuk dalam ayat review supaya elemen KPI wajib tidak tertinggal.</p></div></div><div class="field"><label>Kod staf yang bantu anda <span class="req">*</span></label><input id="staffCode" placeholder="Contoh: SH9861 atau 9861"><div class="hint">Kod staf akan jadi hashtag, contoh #SH9861.</div></div><div id="earnFields"><div class="grid"><div class="field"><label>Barang dibeli <span class="req">*</span></label><input id="earnItem" placeholder="Contoh: peti ais, TV"></div><div class="field"><label>Jumlah belanja <span class="req">*</span></label><div class="money"><b>RM</b><input id="earnPrice" inputmode="decimal" placeholder="0.00"></div></div><div class="field"><label>S-Coin cashback (%) <span class="req">*</span></label><input id="earnPercent" type="number" inputmode="decimal" placeholder="Contoh: 50"></div><div class="field"><label>Nilai S-Coin diterima <span class="req">*</span></label><div class="money"><b>RM</b><input id="earnValue" inputmode="decimal" placeholder="0.00"></div></div></div><div class="calc" id="earnCalc"></div></div><div id="redeemFields" style="display:none"><div class="grid"><div class="field"><label>Barang ditebus / dibeli guna S-Coin <span class="req">*</span></label><input id="redeemItem" placeholder="Contoh: blender, kettle"></div><div class="field"><label>Jumlah S-Coin digunakan <span class="req">*</span></label><input id="redeemPoints" type="number" inputmode="numeric" placeholder="Contoh: 5000"></div><div class="field"><label>Nilai penjimatan / redemption <span class="req">*</span></label><div class="money"><b>RM</b><input id="redeemValue" inputmode="decimal" placeholder="0.00"></div></div></div><div class="calc" id="redeemCalc"></div></div><div class="error" id="formError">Sila lengkapkan semua maklumat wajib.</div><div class="nav"><button class="btn soft" onclick="go(1)">← Kembali</button><button class="btn primary" onclick="validateForm()">Pilih komen random →</button></div></section>
-      <section class="screen" id="s3"><div class="head"><div class="badge">3</div><div><h2>Pilih satu ayat random</h2><p>Template ini sudah masukkan detail anda. Pilih satu dahulu, kemudian boleh edit atau tulis sendiri di step seterusnya.</p></div></div><div class="topTools"><p id="templateStatus">Ayat akan dimuat daripada scoin_comments.json.</p><button class="btn ghost" onclick="loadTemplates()">🔄 Tukar pilihan random</button></div><div class="templates" id="templateList"></div><div class="error" id="templateError">Sila pilih satu template dahulu.</div><div class="nav"><button class="btn soft" onclick="go(2)">← Kembali</button><button class="btn primary" onclick="goEdit()">Edit / semak review →</button></div></section>
-      <section class="screen" id="s4"><div class="head"><div class="badge">4</div><div><h2>Preview, edit atau tulis sendiri</h2><p>Ayat daripada template sudah dimasukkan. Anda boleh kekalkan, tambah ayat, edit, atau tulis semula sendiri.</p></div></div><div class="editGrid"><div><div class="field"><label>Ayat review anda</label><textarea id="finalComment" oninput="updateChecklist(); updatePreview()"></textarea><div class="hint">Pastikan detail wajib masih ada. Hashtag akan ditambah automatik masa copy.</div></div><div class="editBtns"><button class="btn ghost" onclick="restoreTemplate()">↩️ Guna balik template asal</button><button class="btn ghost" onclick="addLine()">➕ Tambah ayat sendiri</button><button class="btn ghost" onclick="ownStarter()">✍️ Tulis sendiri</button></div><div class="error" id="editError">Review belum lengkap. Pastikan maklumat wajib masih ada.</div></div><div class="side"><h3>Checklist detail wajib</h3><div class="checks" id="checks"></div><div class="tip">Butang “Tulis sendiri” akan bagi rangka ayat yang masih kekalkan detail KPI. Anda boleh ubah gaya ayat selepas itu.</div></div></div><div class="nav"><button class="btn soft" onclick="go(3)">← Kembali</button><button class="btn primary" onclick="validateEdit()">Preview akhir →</button></div></section>
-      <section class="screen" id="s5"><div class="head"><div class="badge">5</div><div><h2>Preview akhir & copy</h2><p>Tekan copy dahulu. Lepas itu popout akan keluar untuk buka Google Review dan paste komen.</p></div></div><div class="preview"><div class="reviewHead"><div class="avatar">G</div><div><strong>Google Review</strong><div class="stars">★★★★★</div></div></div><div class="reviewText" id="previewText"></div><div class="hashtags" id="previewTags"></div><div class="warn">Pilih rating di Google berdasarkan pengalaman sebenar anda. Review masih boleh diedit lagi di Google sebelum post.</div></div><div class="nav"><button class="btn soft" onclick="go(4)">← Edit semula</button><button class="btn primary" onclick="copyReview()">Copy review</button></div></section>
+      <div class="screen active" id="s1">
+        <div class="head"><div class="badge">1</div><div><h2>Pilih jenis pengalaman</h2><p>Mulakan dengan pilih situasi yang paling tepat untuk review anda.</p></div></div>
+        <div class="modeGrid">
+          <button class="modeCard" type="button" id="modeEarn"><div class="emoji">💰</div><strong>Beli & dapat S-Coin</strong><span>Untuk pembelian yang menerima S-Coin cashback.</span><small>Perlu isi barang, harga, % S-Coin</small></button>
+          <button class="modeCard" type="button" id="modeRedeem"><div class="emoji">🎁</div><strong>Redeem / guna S-Coin</strong><span>Untuk pembelian yang menggunakan S-Coin dan dapat penjimatan.</span><small>100 S-Coin = RM1 auto kira</small></button>
+        </div>
+        <div class="error" id="modeError">Sila pilih satu jenis pengalaman dahulu.</div>
+      </div>
+
+      <div class="screen" id="s2">
+        <div class="head"><div class="badge">2</div><div><h2 id="formTitle">Isi maklumat ringkas</h2><p>Maklumat ini akan masuk automatik dalam ayat review supaya detail KPI tidak tertinggal.</p></div></div>
+        <div id="earnFields" style="display:none">
+          <div class="formGrid">
+            <div class="field"><label for="earnItem">Barang yang anda beli <span class="req">*</span></label><input id="earnItem" type="text" placeholder="Contoh: TV, peti ais, mesin basuh" autocomplete="off"></div>
+            <div class="field"><label for="earnPrice">Harga barang <span class="req">*</span></label><div class="money"><span>RM</span><input id="earnPrice" type="text" inputmode="decimal" placeholder="0.00"></div></div>
+            <div class="field"><label for="earnPercent">S-Coin cashback (%) <span class="req">*</span></label><input id="earnPercent" type="number" inputmode="decimal" placeholder="Contoh: 50"><div class="hint">Masukkan nombor sahaja. Contoh: 50 untuk 50%.</div></div>
+            <div class="field"><label for="staffCode">Kod staf yang membantu <span class="req">*</span></label><input id="staffCode" type="text" placeholder="Contoh: SH9861 atau 9861" autocomplete="off"><div class="hint">Kod staf akan jadi hashtag automatik.</div></div>
+          </div>
+        </div>
+        <div id="redeemFields" style="display:none">
+          <div class="formGrid">
+            <div class="field"><label for="redeemItem">Barang yang anda redeem / beli <span class="req">*</span></label><input id="redeemItem" type="text" placeholder="Contoh: blender, kettle, rice cooker" autocomplete="off"></div>
+            <div class="field"><label for="redeemPoints">Jumlah S-Coin digunakan <span class="req">*</span></label><input id="redeemPoints" type="number" inputmode="numeric" placeholder="Contoh: 5000"><div class="hint">Nilai RM akan dikira automatik. 100 S-Coin = RM1.</div></div>
+            <div class="field"><label for="staffCodeRedeem">Kod staf yang membantu <span class="req">*</span></label><input id="staffCodeRedeem" type="text" placeholder="Contoh: SH9861 atau 9861" autocomplete="off"><div class="hint">Kod staf akan jadi hashtag automatik.</div></div>
+          </div>
+        </div>
+        <div class="impact" id="impactBox"></div>
+        <div class="error" id="formError">Sila lengkapkan semua maklumat wajib dahulu.</div>
+        <div class="nav"><button class="btn soft" type="button" onclick="go(1)">← Kembali</button><button class="btn primary" type="button" onclick="validateForm()">Pilih komen random →</button></div>
+      </div>
+
+      <div class="screen" id="s3">
+        <div class="head"><div class="badge">3</div><div><h2>Pilih komen cadangan</h2><p>Pilih satu ayat random. Selepas pilih, anda boleh edit, tambah ayat, kekalkan, atau guna format tulis sendiri.</p></div></div>
+        <div class="topTools"><p id="templateInfo">Ayat akan dimuat daripada scoin_comments.json.</p><button class="btn ghost" type="button" onclick="renderTemplates()">🔄 Tukar pilihan ayat</button></div>
+        <div class="templates" id="templateList"></div>
+        <div class="error" id="templateError">Sila pilih satu komen dahulu.</div>
+        <div class="nav"><button class="btn soft" type="button" onclick="go(2)">← Kembali</button><button class="btn primary" type="button" onclick="goEdit()">Semak / edit review →</button></div>
+      </div>
+
+      <div class="screen" id="s4">
+        <div class="head"><div class="badge">4</div><div><h2>Preview dan edit</h2><p>Boleh kekalkan ayat yang dipilih, tambah ayat, atau guna fungsi tulis sendiri yang masih masukkan detail wajib.</p></div></div>
+        <div class="editGrid">
+          <div>
+            <div class="field full"><label for="finalComment">Ayat review anda</label><textarea id="finalComment" oninput="onEditInput()"></textarea><div class="hint">Pastikan detail barang, nilai S-Coin dan hashtag wajib tidak dibuang.</div></div>
+            <div class="editBtns">
+              <button class="btn ghost" type="button" onclick="restoreTemplate()">↩️ Guna semula template</button>
+              <button class="btn ghost" type="button" onclick="addExtraLine()">➕ Tambah ayat natural</button>
+              <button class="btn ghost" type="button" onclick="writeOwnStarter()">✍️ Tulis sendiri</button>
+            </div>
+          </div>
+          <aside class="side">
+            <h3>Checklist detail wajib</h3>
+            <div class="checks" id="checks"></div>
+            <div class="tip">Fungsi “tulis sendiri” tidak kosongkan semua. Ia beri ayat asas dengan detail KPI supaya customer boleh ubah gaya bahasa sahaja.</div>
+          </aside>
+        </div>
+        <div class="error" id="editError">Review belum lengkap. Sila pastikan semua detail wajib masih ada dalam ayat.</div>
+        <div class="nav"><button class="btn soft" type="button" onclick="go(3)">← Kembali</button><button class="btn primary" type="button" onclick="validateEdit()">Preview akhir →</button></div>
+      </div>
+
+      <div class="screen" id="s5">
+        <div class="head"><div class="badge">5</div><div><h2>Copy dan paste di Google Review</h2><p>Semak sekali lagi. Selepas copy, popout akan keluar dengan button untuk buka Google Review.</p></div></div>
+        <div class="preview">
+          <div class="reviewHead"><div class="avatar">G</div><div><strong>Google Review</strong><div class="stars">★★★★★</div></div></div>
+          <div class="reviewText" id="previewText"></div>
+          <div class="hashtags" id="previewTags"></div>
+          <div class="warn">Pilih rating Google ikut pengalaman sebenar anda. Lepas tekan copy, paste komen ini di ruangan Google Review.</div>
+        </div>
+        <div class="nav"><button class="btn soft" type="button" onclick="go(4)">← Edit semula</button><button class="btn primary" type="button" onclick="copyReview()">Copy review</button></div>
+      </div>
     </section>
-  </section>
+  </div>
 </main>
-<div class="float"><button class="btn primary" id="floatBtn" onclick="floatAction()">Seterusnya</button></div>
-<div class="modal" id="copyModal"><div class="modalBox"><div class="modalIcon">✓</div><h3>Review sudah di-copy</h3><p>Sekarang buka Google Review dan paste komen yang sudah disalin tadi.</p><ol><li>Tekan <b>Buka Google Review</b>.</li><li>Pilih rating ikut pengalaman sebenar anda.</li><li>Tekan ruangan komen dan pilih <b>Paste</b>.</li><li>Semak sekali lagi, kemudian post review.</li></ol><div class="modalActions"><button class="btn teal" onclick="openGoogle()">Buka Google Review untuk paste</button><button class="btn soft" onclick="closeModal()">Tutup dulu</button></div></div></div>
-<div class="toast" id="toast">Copied</div>
+
+<div class="float"><button class="btn primary" type="button" id="floatBtn" onclick="floatAction()">Seterusnya</button></div>
+<div class="modal" id="copyModal"><div class="modalBox"><div class="modalIcon">✓</div><h3>Review sudah di-copy</h3><p>Sekarang buka page Google Review dan paste komen tadi.</p><ol><li>Tekan button di bawah.</li><li>Pilih rating ikut pengalaman sebenar.</li><li>Tekan ruangan komen dan paste.</li><li>Post review.</li></ol><div class="modalActions"><button class="btn primary" type="button" onclick="openGoogle()">Buka Google Review untuk paste</button><button class="btn soft" type="button" onclick="closeModal()">Tutup</button></div></div></div>
+<div class="toast" id="toast"></div>
+
 <script>
-const PLACE_ID="ChIJsTTf4iuGyDERHjGUr39tto0";
-const GOOGLE_URL=`https://search.google.com/local/writereview?placeid=${PLACE_ID}`;
-const HASH="#SCoinRedemption #SCoin #SCoinCashback #Cashback";
-const FALLBACK={earn:["Saya beli {item} dengan jumlah {price}. Dapat S-Coin cashback {percent} bernilai {netValue}, memang rasa pembelian ni ada extra value untuk next purchase.","Shopping {item} hari ni memang puas hati. Harga {price}, siap dapat S-Coin cashback {percent} nilai {netValue}. Staff explain pun jelas dan senang faham.","Bought {item} for {price} and received {percent} S-Coin cashback worth {netValue}. Nice reward and useful for future shopping."],redeem:["Saya redeem {item} guna {points} S-Coin dan dapat jimat {value}. Baru nampak S-Coin yang kumpul sebelum ni memang boleh bagi value sebenar.","Hari ni guna {points} S-Coin untuk {item}, terus dapat value {value}. Rasa berbaloi sebab reward boleh terus pakai masa checkout.","Redeemed {item} using {points} S-Coin and saved {value}. The process was simple, and the reward actually felt useful."]};
-let comments=FALLBACK,step=1,mode="",selected="",selectedRaw="";
-const $=id=>document.getElementById(id);
-const stepNames=["Pilih jenis|Beli atau redeem","Isi maklumat|Detail KPI wajib","Pilih komen|Random template","Edit review|Tambah / tulis sendiri","Copy & paste|Ke Google Review"];
-document.addEventListener("DOMContentLoaded",()=>{renderProgress();loadComments();["earnPrice","earnPercent"].forEach(id=>$(id).addEventListener("input",earnSuggest));$("redeemPoints").addEventListener("input",redeemSuggest);["earnPrice","earnValue","redeemValue"].forEach(id=>$(id).addEventListener("blur",()=>{let n=num($(id).value);if(n>0)$(id).value=n.toFixed(2)}));$("staffCode").addEventListener("blur",()=>$("staffCode").value=staff($("staffCode").value));updateFloat()});
-async function loadComments(){try{const r=await fetch("scoin_comments.json",{cache:"no-store"});if(!r.ok)throw 0;const j=await r.json();if(Array.isArray(j.earn)&&Array.isArray(j.redeem)){comments=j}}catch(e){comments=FALLBACK}}
-function renderProgress(){const p=$("progress");p.innerHTML="";stepNames.forEach((s,i)=>{const [a,b]=s.split("|");const d=document.createElement("div");d.className="pstep";d.dataset.i=i+1;d.innerHTML=`<div class="n">${i+1}</div><div><b>${a}</b><span>${b}</span></div>`;p.appendChild(d)})}
-function setProgress(){document.querySelectorAll(".pstep").forEach(d=>{let i=+d.dataset.i;d.classList.toggle("active",i===step);d.classList.toggle("done",i<step)})}
-function go(n){if(n>1&&!mode)return go(1);document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$("s"+n).classList.add("active");step=n;setProgress();if(n===3)loadTemplates();if(n===4){updateChecklist();updatePreview()}if(n===5)updatePreview();updateFloat();scrollTo({top:0,behavior:"smooth"})}
-function chooseMode(m){mode=m;$("modeEarn").classList.toggle("selected",m==="earn");$("modeRedeem").classList.toggle("selected",m==="redeem");$("earnFields").style.display=m==="earn"?"block":"none";$("redeemFields").style.display=m==="redeem"?"block":"none";$("formTitle").textContent=m==="earn"?"Isi maklumat pembelian":"Isi maklumat redemption";selected="";selectedRaw="";$("finalComment").value="";setTimeout(()=>go(2),100)}
-function updateFloat(){const b=$("floatBtn");b.textContent=step===1?"Pilih pengalaman dahulu":step===2?"Pilih komen random":step===3?"Edit / semak review":step===4?"Preview akhir":"Copy review"}
-function floatAction(){if(step===2)return validateForm();if(step===3)return goEdit();if(step===4)return validateEdit();if(step===5)return copyReview();toast("Pilih pengalaman dulu")}
-function staff(v){let c=String(v||"").toUpperCase().replace(/^#+/,"").replace(/[^A-Z0-9]/g,"");if(/^\d{3,}$/.test(c))c="SH"+c;return c}
-function num(v){let n=Number(String(v||"").replace(/,/g,"").replace(/[^0-9.]/g,""));return Number.isFinite(n)?n:0}
-function rm(n){return "RM"+Number(n||0).toLocaleString("en-MY",{minimumFractionDigits:2,maximumFractionDigits:2})}
-function whole(n){return Number(n||0).toLocaleString("en-MY",{maximumFractionDigits:0})}
-function earnSuggest(){let price=num($("earnPrice").value),pct=num($("earnPercent").value),box=$("earnCalc");if(price>0&&pct>0){let val=price*pct/100*.95;box.classList.add("show");box.innerHTML=`Anggaran selepas 5% deduction: ${rm(val)} <button onclick="$('earnValue').value='${val.toFixed(2)}'">Guna value ini</button>`}else box.classList.remove("show")}
-function redeemSuggest(){let pts=num($("redeemPoints").value),box=$("redeemCalc");if(pts>0){let val=pts/100;box.classList.add("show");box.innerHTML=`Anggaran redemption: ${rm(val)} <button onclick="$('redeemValue').value='${val.toFixed(2)}'">Guna value ini</button>`}else box.classList.remove("show")}
-function validateForm(){$("formError").classList.remove("show");$("staffCode").value=staff($("staffCode").value);let ok=!!$("staffCode").value.trim();if(mode==="earn")ok=ok&&$("earnItem").value.trim()&&num($("earnPrice").value)>0&&num($("earnPercent").value)>0&&num($("earnValue").value)>0;else ok=ok&&$("redeemItem").value.trim()&&num($("redeemPoints").value)>0&&num($("redeemValue").value)>0;if(!ok){$("formError").classList.add("show");return toast("Lengkapkan maklumat wajib")}selected="";selectedRaw="";go(3)}
-function data(){return mode==="earn"?{item:$("earnItem").value.trim(),price:rm(num($("earnPrice").value)),percent:num($("earnPercent").value).toLocaleString("en-MY")+"%",netValue:rm(num($("earnValue").value)),staff:staff($("staffCode").value)}:{item:$("redeemItem").value.trim(),points:whole(num($("redeemPoints").value)),value:rm(num($("redeemValue").value)),staff:staff($("staffCode").value)}}
-function fill(t){const d=data();return String(t||"").replaceAll("{item}",d.item).replaceAll("{price}",d.price).replaceAll("{percent}",d.percent).replaceAll("{netValue}",d.netValue).replaceAll("{points}",d.points).replaceAll("{value}",d.value)}
-function loadTemplates(){const list=$("templateList"),pool=(comments[mode]&&comments[mode].length?comments[mode]:FALLBACK[mode]);$("templateStatus").textContent=`Pilih satu daripada ${pool.length} ayat cadangan. Tekan tukar pilihan untuk random lain.`;list.innerHTML="";$("templateError").classList.remove("show");shuffle(pool).slice(0,5).forEach((tpl,i)=>{const card=document.createElement("button");card.type="button";card.className="tcard";const tag=document.createElement("span");tag.className="tag";tag.textContent="Pilihan "+(i+1);const p=document.createElement("p");p.textContent=fill(tpl);card.append(tag,p);card.onclick=()=>{document.querySelectorAll(".tcard").forEach(c=>c.classList.remove("selected"));card.classList.add("selected");selected=fill(tpl);selectedRaw=tpl;$("finalComment").value=selected;$("templateError").classList.remove("show");toast("Template dipilih")};list.appendChild(card)})}
-function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function goEdit(){if(!selected){$("templateError").classList.add("show");return toast("Pilih satu komen dulu")}$("finalComment").value=selected;go(4)}
-function restoreTemplate(){if(selected)$("finalComment").value=selected;updateChecklist();updatePreview()}
-function addLine(){let add=mode==="earn"?"\n\nOverall, pengalaman shopping memang smooth dan penerangan tentang S-Coin pun senang faham.":"\n\nOverall, proses redeem senang dan rasa berbaloi sebab S-Coin boleh terus digunakan.";$("finalComment").value=$("finalComment").value.trim()+add;updateChecklist();updatePreview();$("finalComment").focus()}
-function ownStarter(){const d=data();$("finalComment").value=mode==="earn"?`Saya beli ${d.item} dengan jumlah ${d.price}. Saya dapat S-Coin cashback ${d.percent} bernilai ${d.netValue}. Bagi saya, pembelian ni rasa lebih berbaloi sebab ada reward untuk digunakan selepas ini.`:`Saya redeem ${d.item} menggunakan ${d.points} S-Coin dan dapat nilai penjimatan ${d.value}. Rasa puas sebab S-Coin yang dikumpul sebelum ini boleh digunakan untuk kurangkan bayaran.`;updateChecklist();updatePreview();$("finalComment").focus()}
-function required(){const d=data();return mode==="earn"?[`Barang: ${d.item}|${d.item}`,`Jumlah belanja: ${d.price}|${d.price}`,`S-Coin cashback: ${d.percent}|${d.percent}`,`Nilai S-Coin: ${d.netValue}|${d.netValue}`]:[`Barang: ${d.item}|${d.item}`,`S-Coin digunakan: ${d.points}|${d.points}`,`Nilai penjimatan: ${d.value}|${d.value}`]}
-function updateChecklist(){const text=$("finalComment").value.toLowerCase(),wrap=$("checks");wrap.innerHTML="";required().forEach(x=>{let [label,value]=x.split("|");let ok=text.includes(value.toLowerCase());let d=document.createElement("div");d.className="check"+(ok?" ok":"");d.innerHTML=`<span class="tick">${ok?"✓":"!"}</span><span></span>`;d.querySelector("span:last-child").textContent=label;wrap.appendChild(d)})}
-function validateEdit(){$("editError").classList.remove("show");let text=$("finalComment").value.trim().toLowerCase();let ok=text.length>10&&required().every(x=>text.includes(x.split("|")[1].toLowerCase()));if(!ok){$("editError").classList.add("show");updateChecklist();return toast("Detail wajib belum lengkap")}go(5)}
-function tags(){return `${HASH} #${staff($("staffCode").value)}`}
-function updatePreview(){$("previewText").textContent=$("finalComment").value.trim()||"Review anda akan dipaparkan di sini.";$("previewTags").textContent=tags()}
-async function copyReview(){const text=`${$("finalComment").value.trim()}\n\n${tags()}`;try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove()}toast("Review sudah copy");$("copyModal").classList.add("show")}
-function openGoogle(){window.open(GOOGLE_URL,"_blank","noopener,noreferrer")}
-function closeModal(){$("copyModal").classList.remove("show")}
-function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.tto);window.tto=setTimeout(()=>t.classList.remove("show"),1700)}
+const PLACE_ID = "ChIJsTTf4iuGyDERHjGUr39tto0";
+const GOOGLE_URL = `https://search.google.com/local/writereview?placeid=${PLACE_ID}`;
+const MANDATORY_HASH = "#SCoinRedemption #SCoin #SCoinCashback #Cashback #GrandSenhengKemaman";
+const FALLBACK = {
+  earn: [
+    "Saya beli {item} dengan jumlah {price}. Dapat S-Coin cashback {percent} bernilai {netValue}, memang rasa pembelian ni ada extra value untuk next purchase.",
+    "Shopping {item} hari ni smooth. Harga {price}, siap dapat S-Coin cashback {percent} nilai {netValue}. Staff explain pun jelas dan senang faham.",
+    "Bought {item} for {price} and received {percent} S-Coin cashback worth {netValue}. Nice reward and useful for future shopping."
+  ],
+  redeem: [
+    "Saya redeem {item} guna {points} S-Coin dan dapat jimat {value}. Baru nampak S-Coin yang kumpul sebelum ni memang boleh bagi value sebenar.",
+    "Hari ni guna {points} S-Coin untuk {item}, terus dapat value {value}. Rasa berbaloi sebab reward boleh terus pakai masa checkout.",
+    "Redeemed {item} using {points} S-Coin and saved {value}. The process was simple, and the reward actually felt useful."
+  ]
+};
+let comments = FALLBACK;
+let step = 1;
+let mode = "";
+let selectedTemplate = "";
+let selectedText = "";
+const $ = (id) => document.getElementById(id);
+const steps = [
+  ["Pilih jenis", "Beli atau redeem"],
+  ["Isi maklumat", "Detail KPI wajib"],
+  ["Pilih komen", "Random template"],
+  ["Edit review", "Edit / tulis sendiri"],
+  ["Copy & paste", "Ke Google Review"]
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProgress();
+  setProgress();
+  loadComments();
+  ["earnItem", "earnPrice", "earnPercent", "staffCode", "redeemItem", "redeemPoints", "staffCodeRedeem"].forEach(id => {
+    $(id).addEventListener("input", () => { updateImpact(); refreshSelectedAfterInput(); });
+    $(id).addEventListener("blur", () => { if(id.includes("staffCode")) $(id).value = normaliseStaff($(id).value); updateImpact(); refreshSelectedAfterInput(); });
+  });
+  $("copyModal").addEventListener("click", (event) => { if(event.target.id === "copyModal") closeModal(); });
+  document.addEventListener("keydown", (event) => { if(event.key === "Escape") closeModal(); });
+  updateFloat();
+});
+
+function renderProgress(){
+  const wrap = $("progress");
+  wrap.innerHTML = "";
+  steps.forEach((s, i) => {
+    const div = document.createElement("div");
+    div.className = "stepDot";
+    div.dataset.step = i + 1;
+    div.innerHTML = `<div class="num">${i + 1}</div><div><b>${s[0]}</b><span>${s[1]}</span></div>`;
+    wrap.appendChild(div);
+  });
+}
+function setProgress(){
+  document.querySelectorAll(".stepDot").forEach(el => {
+    const n = Number(el.dataset.step);
+    el.classList.toggle("active", n === step);
+    el.classList.toggle("done", n < step);
+  });
+}
+function go(n){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $("s" + n).classList.add("active");
+  step = n;
+  setProgress();
+  if(n === 3) renderTemplates();
+  if(n === 4){ updateChecklist(); updatePreview(); }
+  if(n === 5) updatePreview();
+  updateFloat();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function updateFloat(){
+  const label = step === 1 ? "Pilih pengalaman" : step === 2 ? "Pilih komen random" : step === 3 ? "Semak / edit" : step === 4 ? "Preview akhir" : "Copy review";
+  $("floatBtn").textContent = label;
+}
+function floatAction(){
+  if(step === 1) return toast("Pilih pengalaman dahulu");
+  if(step === 2) return validateForm();
+  if(step === 3) return goEdit();
+  if(step === 4) return validateEdit();
+  if(step === 5) return copyReview();
+}
+function chooseMode(next){
+  mode = next;
+  $("modeEarn").classList.toggle("selected", mode === "earn");
+  $("modeRedeem").classList.toggle("selected", mode === "redeem");
+  $("earnFields").style.display = mode === "earn" ? "block" : "none";
+  $("redeemFields").style.display = mode === "redeem" ? "block" : "none";
+  $("formTitle").textContent = mode === "earn" ? "Isi maklumat pembelian" : "Isi maklumat redeem S-Coin";
+  selectedTemplate = "";
+  selectedText = "";
+  $("finalComment").value = "";
+  $("modeError").classList.remove("show");
+  setTimeout(() => go(2), 90);
+}
+function normaliseStaff(value){
+  let clean = String(value || "").trim().toUpperCase().replace(/^#+/, "").replace(/[^A-Z0-9]/g, "");
+  if(/^\d{3,}$/.test(clean)) clean = "SH" + clean;
+  return clean;
+}
+function numberOnly(value){
+  const n = Number(String(value || "").replace(/,/g, "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(n) ? n : 0;
+}
+function rm(value){
+  return "RM" + Number(value || 0).toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function whole(value){
+  return Number(value || 0).toLocaleString("en-MY", { maximumFractionDigits: 0 });
+}
+function earnNetValue(){
+  return numberOnly($("earnPrice").value) * numberOnly($("earnPercent").value) / 100;
+}
+function redeemValue(){
+  return numberOnly($("redeemPoints").value) / 100;
+}
+function staffCode(){
+  return normaliseStaff(mode === "earn" ? $("staffCode").value : $("staffCodeRedeem").value);
+}
+function data(){
+  if(mode === "earn"){
+    return {
+      item: $("earnItem").value.trim(),
+      price: rm(numberOnly($("earnPrice").value)),
+      percent: numberOnly($("earnPercent").value) + "%",
+      netValue: rm(earnNetValue()),
+      staff: staffCode()
+    };
+  }
+  return {
+    item: $("redeemItem").value.trim(),
+    points: whole(numberOnly($("redeemPoints").value)),
+    value: rm(redeemValue()),
+    staff: staffCode()
+  };
+}
+function updateImpact(){
+  const box = $("impactBox");
+  if(!mode){ box.classList.remove("show"); return; }
+  if(mode === "earn"){
+    const price = numberOnly($("earnPrice").value);
+    const pct = numberOnly($("earnPercent").value);
+    if(price > 0 && pct > 0){
+      box.textContent = `Auto kira nilai S-Coin cashback: ${rm(earnNetValue())}. Nilai ini akan masuk dalam ayat review.`;
+      box.classList.add("show");
+    } else box.classList.remove("show");
+  } else {
+    const pts = numberOnly($("redeemPoints").value);
+    if(pts > 0){
+      box.textContent = `Auto kira redemption: ${whole(pts)} S-Coin = ${rm(redeemValue())}. Formula: 100 S-Coin = RM1.`;
+      box.classList.add("show");
+    } else box.classList.remove("show");
+  }
+}
+function validateForm(){
+  $("formError").classList.remove("show");
+  if(!mode){ go(1); $("modeError").classList.add("show"); return; }
+  if(mode === "earn") $("staffCode").value = normaliseStaff($("staffCode").value);
+  else $("staffCodeRedeem").value = normaliseStaff($("staffCodeRedeem").value);
+  let ok = false;
+  if(mode === "earn") ok = $("earnItem").value.trim() && numberOnly($("earnPrice").value) > 0 && numberOnly($("earnPercent").value) > 0 && staffCode();
+  else ok = $("redeemItem").value.trim() && numberOnly($("redeemPoints").value) > 0 && staffCode();
+  if(!ok){ $("formError").classList.add("show"); return toast("Lengkapkan maklumat wajib dahulu"); }
+  selectedTemplate = "";
+  selectedText = "";
+  $("finalComment").value = "";
+  go(3);
+}
+function fillTemplate(tpl){
+  const d = data();
+  return String(tpl || "")
+    .replaceAll("{item}", d.item)
+    .replaceAll("{price}", d.price)
+    .replaceAll("{percent}", d.percent)
+    .replaceAll("{netValue}", d.netValue)
+    .replaceAll("{points}", d.points)
+    .replaceAll("{value}", d.value);
+}
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function renderTemplates(){
+  const list = $("templateList");
+  list.innerHTML = "";
+  $("templateError").classList.remove("show");
+  const pool = (comments[mode] && comments[mode].length) ? comments[mode] : FALLBACK[mode];
+  $("templateInfo").textContent = `Pilih satu daripada ${pool.length} ayat cadangan. Tekan tukar pilihan untuk random lain.`;
+  shuffle(pool).slice(0,5).forEach((tpl, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "templateCard";
+    card.innerHTML = `<small>Pilihan ${index + 1}</small><p></p>`;
+    card.querySelector("p").textContent = fillTemplate(tpl);
+    card.addEventListener("click", () => {
+      document.querySelectorAll(".templateCard").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      selectedTemplate = tpl;
+      selectedText = fillTemplate(tpl);
+      $("finalComment").value = selectedText;
+      $("templateError").classList.remove("show");
+      toast("Template dipilih");
+    });
+    list.appendChild(card);
+  });
+}
+function refreshSelectedAfterInput(){
+  if(selectedTemplate && step <= 3){
+    selectedText = fillTemplate(selectedTemplate);
+    $("finalComment").value = selectedText;
+  }
+}
+function goEdit(){
+  if(!selectedTemplate){ $("templateError").classList.add("show"); return toast("Pilih satu komen dahulu"); }
+  $("finalComment").value = selectedText || fillTemplate(selectedTemplate);
+  go(4);
+}
+function restoreTemplate(){
+  if(selectedTemplate) $("finalComment").value = fillTemplate(selectedTemplate);
+  onEditInput();
+}
+function addExtraLine(){
+  const extra = mode === "earn" ? "\n\nOverall, pengalaman shopping memang smooth dan penerangan tentang S-Coin pun senang faham." : "\n\nOverall, proses redeem senang dan value S-Coin memang nampak masa checkout.";
+  $("finalComment").value = $("finalComment").value.trim() + extra;
+  onEditInput();
+  $("finalComment").focus();
+}
+function writeOwnStarter(){
+  const d = data();
+  if(mode === "earn"){
+    $("finalComment").value = `Saya beli ${d.item} dengan jumlah ${d.price}. Pembelian ni dapat S-Coin cashback ${d.percent} bernilai ${d.netValue}. Bagi saya, reward macam ni buat shopping rasa lebih berbaloi sebab boleh digunakan untuk pembelian seterusnya.`;
+  } else {
+    $("finalComment").value = `Saya redeem ${d.item} menggunakan ${d.points} S-Coin dan nilai penjimatan dia ialah ${d.value}. Senang juga sebab sistem auto tolak ikut value S-Coin, jadi rasa reward yang dikumpul memang berguna.`;
+  }
+  onEditInput();
+  $("finalComment").focus();
+}
+function requiredChecks(){
+  const d = data();
+  if(mode === "earn") return [
+    ["Barang", d.item], ["Jumlah belanja", d.price], ["S-Coin cashback", d.percent], ["Nilai S-Coin", d.netValue]
+  ];
+  return [["Barang", d.item], ["S-Coin digunakan", d.points], ["Nilai penjimatan", d.value]];
+}
+function looseIncludes(text, value){
+  const lower = text.toLowerCase();
+  const v = String(value || "").toLowerCase();
+  const digits = v.replace(/[^0-9]/g, "");
+  return lower.includes(v) || (digits.length >= 2 && lower.replace(/[^0-9]/g, "").includes(digits));
+}
+function updateChecklist(){
+  const text = $("finalComment").value;
+  const wrap = $("checks");
+  wrap.innerHTML = "";
+  requiredChecks().forEach(([label, value]) => {
+    const ok = looseIncludes(text, value);
+    const div = document.createElement("div");
+    div.className = "check" + (ok ? " ok" : "");
+    div.innerHTML = `<span class="tick">${ok ? "✓" : "!"}</span><span></span>`;
+    div.querySelector("span:last-child").textContent = `${label}: ${value}`;
+    wrap.appendChild(div);
+  });
+}
+function onEditInput(){
+  updateChecklist();
+  updatePreview();
+}
+function validateEdit(){
+  $("editError").classList.remove("show");
+  const text = $("finalComment").value.trim();
+  const ok = text.length > 12 && requiredChecks().every(([label, value]) => looseIncludes(text, value));
+  if(!ok){ $("editError").classList.add("show"); updateChecklist(); return toast("Detail wajib belum lengkap"); }
+  go(5);
+}
+function hashtags(){
+  const staff = staffCode();
+  return staff ? `${MANDATORY_HASH} #${staff}` : MANDATORY_HASH;
+}
+function updatePreview(){
+  $("previewText").textContent = $("finalComment").value.trim() || "Review anda akan muncul di sini.";
+  $("previewTags").textContent = hashtags();
+}
+function finalReview(){
+  return `${$("finalComment").value.trim()}\n\n${hashtags()}`.trim();
+}
+async function copyReview(){
+  const text = finalReview();
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(err){
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    temp.remove();
+  }
+  $("copyModal").classList.add("show");
+  toast("Review sudah copy");
+}
+function openGoogle(){ window.open(GOOGLE_URL, "_blank", "noopener,noreferrer"); }
+function closeModal(){ $("copyModal").classList.remove("show"); }
+function toast(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => t.classList.remove("show"), 1700);
+}
+async function loadComments(){
+  try{
+    const res = await fetch("scoin_comments.json", { cache: "no-store" });
+    if(!res.ok) throw new Error("JSON not found");
+    const json = await res.json();
+    if(Array.isArray(json.earn) && Array.isArray(json.redeem) && json.earn.length && json.redeem.length){
+      comments = json;
+    } else throw new Error("Invalid JSON");
+  }catch(err){
+    comments = FALLBACK;
+  }
+}
+$("modeEarn").addEventListener("click", () => chooseMode("earn"));
+$("modeRedeem").addEventListener("click", () => chooseMode("redeem"));
 </script>
 </body>
 </html>
